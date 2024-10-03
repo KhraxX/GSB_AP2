@@ -1,0 +1,30 @@
+body{
+    margin: 30px;
+}
+.navbar {
+    background-color: aquamarine; /* Green background */
+}
+.navbar-brand, .nav-link {
+    color: #000000 !important; /* White text */
+}
+.navbar-toggler {
+    border-color: #000000; /* White border for toggler */
+}
+
+.dropdown-menu {
+    background-color: aquamarine; /* Green background for dropdown */
+}
+.dropdown-item {
+    color: #020101 !important; /* White text for dropdown items */
+}
+.dropdown-item:hover {
+    background-color: white; /* Darker green on hover */
+}
+.btn-outline-success {
+    color: #000000; /* White text */
+    border-color: #fff; /* White border */
+}
+.btn-outline-success:hover {
+    background-color: #fff; /* White background on hover */
+    color: #4CAF50; /* Green text on hover */
+}
