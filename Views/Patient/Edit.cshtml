@@ -1,9 +1,8 @@
-﻿// Vue (Edit.cshtml)
-@model PatientEditViewModel
+﻿@model PatientEditViewModel
 
-<h2>Éditer Patient</h2>
+<h1>Éditer Patient</h1>
 
-<form asp-action="Edit">
+<form asp-action="Edit" asp-asp-controller="Patient"  method="POST">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Patient.PatientId" />
 
@@ -63,8 +62,3 @@
     <a asp-action="Index">Retour à la liste</a>
 </div>
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}

@@ -1,6 +1,7 @@
 // set up the basic features of the ASP.NET Core platform
 
 using ASPBookProject.Data;
+using ASPBookProject.Models;
 using ASPBookProject.Services.FakeDataService;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,8 +27,36 @@ builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), serverVersion)
 );
 
+
+builder.Services.AddDefaultIdentity<Medecin>(options =>
+  {
+    options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 1;
+    options.User.RequireUniqueEmail = false;
+  }
+).AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.ConfigureApplicationCookie(options =>
+    options.LoginPath = "/Account/Login"
+);
+
+
 // set up middleware components
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/Error/Index");
+    app.UseStatusCodePagesWithRedirects("/Error/Index");
+}
 
 // Verification que la base de donnees est creee
 var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<ApplicationDbContext>();
@@ -37,6 +66,7 @@ context.Database.EnsureCreated();
 // sont pas accessible coté client
 // Le composant middleware UseStaticFiles le permet
 app.UseStaticFiles(); // give access to files in wwwroot
+app.UseAuthentication();
 
 // Au sein de notre projet UseStaticFiles() sera appelé avant 
 // UseAuthentication() ce qui permettra l'accès aux fichiers 
@@ -52,10 +82,11 @@ app.UseRouting();
 
 // Default Routing system
 // app.MapDefaultControllerRoute();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Instructor}/{action=index}/{id?}"
+    pattern: "{controller=Account}/{action=Login}/{id?}"
 );
 
 app.Run();

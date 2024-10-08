@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Patient
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Ajouter</title>
+</head>
+
+<body>
+    <h1>Créer un nouveau patient</h1>
+
+    <form asp-action="Add" asp-controller="Patient" method="post">
+        
+        <div class="form-group">
+            <label asp-form="PatientId"></label> <input asp-for="PatientId" class="form-control">
+            @* ajout de message d'erreur de validation inline pour chaque propriete individuellement *@
+            <span asp-validation-for="PatientId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Prenom_p"></label> <input asp-for="Prenom_p" class="form-control" />
+            @* ajout de message d'erreur de validation inline pour chaque propriete individuellement *@
+            <span asp-validation-for="Prenom_p" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Nom_p"></label> <input asp-for="Nom_p" class="form-control" />
+            @* ajout de message d'erreur de validation inline pour chaque propriete individuellement *@
+            <span asp-validation-for="Nom_p" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Sexe_p"></label> <input asp-for="Sexe_p" class="form-control" />
+            @* ajout de message d'erreur de validation inline pour chaque propriete individuellement *@
+            <span asp-validation-for="Sexe_p" class="text-danger"></span>
+        </div>
+
+         <div class="form-group">
+            <label asp-for="Num_secu"></label> <input asp-for="Num_secu" class="form-control" />
+            @* ajout de message d'erreur de validation inline pour chaque propriete individuellement *@
+            <span asp-validation-for="Num_secu" class="text-danger"></span>
+        </div>
+        <input type="submit" value="Create Patient" class="btn btn-primary" />
+    </form>
+
+    @* Permet de visualiser le resume de l'ensemble des erreurs de validation, ceci est un tag helper *@
+    <div asp-validation-summary="All" class="text-danger"></div>
+</body>

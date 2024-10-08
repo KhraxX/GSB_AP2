@@ -1,7 +1,9 @@
 using ASPBookProject.Data;
 using ASPBookProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 
 // Modèle ViewModel
@@ -15,10 +17,11 @@ public class PatientEditViewModel
 }
 
 namespace ASPBookProject.Controllers
-{
+{   
+    [Authorize]
     public class PatientController : Controller
     {
-        // 
+        
         private readonly ApplicationDbContext _context;
 
         // Controleur, injection de dependance
@@ -26,12 +29,16 @@ namespace ASPBookProject.Controllers
         {
             _context = context;
         }
-
         // GET: PatientController
+
+        [Authorize]
         public ActionResult Index()
         {
-            return View();
+            List<Patient> patients = new List<Patient>();
+            patients = _context.Patients.ToList();
+            return View(patients);
         }
+
 
         // Edit: PatientController 
         public async Task<IActionResult> Edit(int id)
@@ -57,15 +64,15 @@ namespace ASPBookProject.Controllers
 
             return View(viewModel);
         }
-
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, PatientEditViewModel viewModel)
+        public async Task<IActionResult> Edit(PatientEditViewModel viewModel)
         {
-            if (id != viewModel.Patient.PatientId)
-            {
-                return NotFound();
-            }
+            // if (id != viewModel.Patient.PatientId)
+            // {
+            //     return NotFound();
+            // }
 
             if (ModelState.IsValid)
             {
@@ -74,7 +81,7 @@ namespace ASPBookProject.Controllers
                     var patient = await _context.Patients
                         .Include(p => p.Antecedents)
                         .Include(p => p.Allergies)
-                        .FirstOrDefaultAsync(p => p.PatientId == id);
+                        .FirstOrDefaultAsync(p => p.PatientId == viewModel.Patient!.PatientId);
 
                     if (patient == null)
                     {
@@ -140,7 +147,61 @@ namespace ASPBookProject.Controllers
             return _context.Patients.Any(e => e.PatientId == id);
         }
 
+        public async Task<IActionResult> ShowDetails(int id)
+        {
+            var patient = await _context.Patients
+                .Include(p => p.Antecedents)
+                .Include(p => p.Allergies)
+                .FirstOrDefaultAsync(p => p.PatientId == id);
+
+            if (patient == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new PatientEditViewModel
+            {
+                Patient = patient,
+                Antecedents = await _context.Antecedents.ToListAsync(),
+                Allergies = await _context.Allergies.ToListAsync(),
+                SelectedAntecedentIds = patient.Antecedents.Select(a => a.AntecedentId).ToList() ?? new List<int>(),
+                SelectedAllergieIds = patient.Allergies.Select(a => a.AllergieId).ToList() ?? new List<int>()
+            };
+
+            return View(viewModel);
+        }
+
+    [HttpGet]
+    public  IActionResult Delete(int id) 
+    {
+            // On recherche l'instructeur à supprimer avec l'id fourni en paramètre
+            Patient? pati = _context.Patients.FirstOrDefault<Patient>(ins => ins.PatientId == id);
+
+            if (pati != null) // Si l'instructeur est trouvé
+            {
+                return View(pati); // On retourne la vue Delete.cshtml avec l'instructeur à supprimer
+            }
+            // Si l'instructeur n'est pas trouvé on retourne une erreur 404
+            return NotFound();
 
 
+
+    }
+    [HttpPost]
+    public IActionResult DeleteConfirmed(int PatientId)
+        {
+            // On recherche l'instructeur à supprimer avec l'id fourni en paramètre
+            Patient? pati = _context.Patients.FirstOrDefault<Patient>(pat => pat.PatientId == PatientId);
+
+            if (pati != null) // Si l'instructeur est trouvé
+            {
+                _context.Patients.Remove(pati);
+                _context.SaveChanges();
+                return RedirectToAction("Index"); // On retourne la vue Delete.cshtml avec l'instructeur à supprimer
+            }
+            // Si l'instructeur n'est pas trouvé on retourne une erreur 404
+            return NotFound();
+            //return View();
+        }
     }
 }
