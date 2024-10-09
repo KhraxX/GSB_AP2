@@ -15,29 +15,33 @@
         <div class="container-fluid">
             <a asp-action="Index" asp-controller="Patient">
             <img src="~/image/logo-gsb.png" width="90" height="50"></a>
+            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link disabled fs-4" aria-disabled="true" >Bienvenue sur votre interface GSB</a>
-                    </li>
-                </ul>
-                @if (User.Identity.IsAuthenticated) {
-                <span class="navbar-text">Hello, @User.Identity.Name!</span>
-
-                <a asp-action="Logout" asp-controller="Account">Logout</a>
+            <div class="text-log">
+            @if (User.Identity.IsAuthenticated) {
+                <span class="navbar-text">Ravie de vous revoir @User.Identity.Name!</span>
+                
+                <a asp-action="Logout" asp-controller="Account">
+                    <button type="button" class="btn btn-danger">Déconnexion
+                    </button>
+                </a>
+                
                 } else {
 
-                <a asp-action="Login" asp-controller="Account">Login</a>
+                <a asp-action="Login" asp-controller="Account"></a>
                 }
+            </div>
+                
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    
                 <form class="d-flex text-right" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Rechercher</button>
-
                 </form>
 
             </div>
@@ -49,6 +53,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+
+<footer>
+    <nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1">FAQ</span>
+  </div>
+</nav>
+</footer>
+
 
 </body>
 </html>

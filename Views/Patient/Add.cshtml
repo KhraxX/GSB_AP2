@@ -14,33 +14,27 @@
     <h1>Créer un nouveau patient</h1>
 
     <form asp-action="Add" asp-controller="Patient" method="post">
-        
-        <div class="form-group">
-            <label asp-form="PatientId"></label> <input asp-for="PatientId" class="form-control">
-            @* ajout de message d'erreur de validation inline pour chaque propriete individuellement *@
-            <span asp-validation-for="PatientId" class="text-danger"></span>
-        </div>
 
         <div class="form-group">
-            <label asp-for="Prenom_p"></label> <input asp-for="Prenom_p" class="form-control" />
+            <label asp-for="Prenom_p">Prénom</label> <input asp-for="Prenom_p" class="form-control" />
             @* ajout de message d'erreur de validation inline pour chaque propriete individuellement *@
             <span asp-validation-for="Prenom_p" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="Nom_p"></label> <input asp-for="Nom_p" class="form-control" />
+            <label asp-for="Nom_p">Nom</label> <input asp-for="Nom_p" class="form-control" />
             @* ajout de message d'erreur de validation inline pour chaque propriete individuellement *@
             <span asp-validation-for="Nom_p" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="Sexe_p"></label> <input asp-for="Sexe_p" class="form-control" />
+            <label asp-for="Sexe_p">Sexe</label> <input asp-for="Sexe_p" class="form-control" />
             @* ajout de message d'erreur de validation inline pour chaque propriete individuellement *@
             <span asp-validation-for="Sexe_p" class="text-danger"></span>
         </div>
 
          <div class="form-group">
-            <label asp-for="Num_secu"></label> <input asp-for="Num_secu" class="form-control" />
+            <label asp-for="Num_secu">Numéro de sécu</label> <input asp-for="Num_secu" class="form-control" />
             @* ajout de message d'erreur de validation inline pour chaque propriete individuellement *@
             <span asp-validation-for="Num_secu" class="text-danger"></span>
         </div>

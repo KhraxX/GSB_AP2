@@ -28,7 +28,7 @@
 }
 
 .container {
-    margin: 0px 30px;
+    margin: 0px 0px;
     text-align: center;
 }
 
@@ -41,4 +41,34 @@
 h1 {
     text-align: center;
     margin: 30px 0px;
+}
+
+.text-log {
+
+    padding: 0px 50px;
+}
+.doc{
+    width: 90%;
+    height:90%;
+}
+.collapse {
+    padding-left: 750px;
+    
+}
+
+.col-3 {
+
+    padding: 0px;
+}
+
+.doc2 {
+
+    width: 90%;
+    height:90%;
+    
+}
+
+footer {
+
+    position: absolute;
 }

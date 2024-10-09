@@ -203,5 +203,27 @@ namespace ASPBookProject.Controllers
             return NotFound();
             //return View();
         }
+
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(Patient patient)
+        {
+            // verification de la validite du model avec ModelState
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            _context.Patients.Add(patient);
+            _context.SaveChanges();
+            // return View("Index", _dbContext.Instructors); // retourne la vue Index.cshtml avec la nouvelle liste
+            return RedirectToAction("Index");
+        }
+
     }
 }

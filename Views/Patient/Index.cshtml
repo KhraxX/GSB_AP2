@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<Patient>
 
-<div class="container">
+<div class="container-fluid">
 <div class="row">
-    <div class="col-2">
-        <img src="~/image/medecin.png">
+    <div class="col-3">
+        <img class="doc" src="~/image/medecin.png">
     </div>
 
     <div class="col">
@@ -31,9 +31,21 @@
                         <td>@Html.DisplayFor(m => patient.Prenom_p)</td>
                         <td>@Html.DisplayFor(m => patient.Sexe_p)</td>
                         <td>@Html.DisplayFor(m => patient.Num_secu)</td>                              
-                        <TD><a asp-action="ShowDetails" asp-route-id="@patient.PatientId"> Fiche</a> </TD>
-                        <TD><a asp-action="Edit" asp-route-id="@patient.PatientId"> Modifier</a> </TD>
-                        <TD><a asp-action="Delete" asp-route-id="@patient.PatientId"> Supprimer</a> </TD>
+                        <TD><a asp-action="ShowDetails" asp-route-id="@patient.PatientId">
+
+                            <button type="button" class="btn btn-info">Fiche</button>
+
+                        </a> </TD>
+                        <TD><a asp-action="Edit" asp-route-id="@patient.PatientId">
+
+                            <button type="button" class="btn btn-warning">Modifier</button>
+
+                        </a> </TD>
+                        <TD><a asp-action="Delete" asp-route-id="@patient.PatientId">
+                            <button type="button" class="btn btn-danger">Supprimer</button>
+
+
+                        </a> </TD>
                     </tr>
                 }
             </tbody>
@@ -46,6 +58,8 @@
     }
     <a asp-action="Add">Ajouter un patient</a></div>
 
-    <div class="col-2"></div>
+    <div class="col-3">
+        <img class="doc2" src="~/image/medecin2.png">
+    </div>
 </div>
 </div>

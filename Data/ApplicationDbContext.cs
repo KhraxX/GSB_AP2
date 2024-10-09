@@ -113,7 +113,7 @@ public class ApplicationDbContext : IdentityDbContext<Medecin>
                 PatientId = 1,
                 Nom_p = "John",
                 Prenom_p     = "Doe",
-                Num_secu ="1234",
+                Num_secu = 1234,
                 Sexe_p ="f"
             });
     }
