@@ -2,9 +2,11 @@
 .navbar {
     background-color: aquamarine; 
 }
+
 .navbar-brand, .nav-link {
     color: #000000 !important; 
 }
+
 .navbar-toggler {
     border-color: #000000; 
 }
@@ -12,16 +14,20 @@
 .dropdown-menu {
     background-color: aquamarine; 
 }
+
 .dropdown-item {
     color: #020101 !important; 
 }
+
 .dropdown-item:hover {
     background-color: white;
 }
+
 .btn-outline-success {
     color: #000000; 
     border-color: #fff; 
 }
+
 .btn-outline-success:hover {
     background-color: #fff; 
     color: #4CAF50; 
