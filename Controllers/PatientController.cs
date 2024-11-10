@@ -225,5 +225,23 @@ namespace ASPBookProject.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchPatients(string nom_p, string prenom_p)
+        {
+            var query = _context.Patients.AsQueryable();
+
+            if (!string.IsNullOrEmpty(nom_p))
+            {
+                query = query.Where(p => p.Nom_p.Contains(nom_p));
+            }
+
+            if (!string.IsNullOrEmpty(prenom_p))
+            {
+                query = query.Where(p => p.Prenom_p.Contains(prenom_p));
+            }
+
+            var patients = await query.ToListAsync();
+            return Json(patients);
+        }
     }
 }

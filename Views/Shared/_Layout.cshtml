@@ -39,8 +39,8 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     
-                <form class="d-flex text-right" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
+                <form id="searchForm" class="d-flex text-right" role="search" onsubmit="return false;">
+                    <input class="form-control me-2" id="searchInput" type="text" placeholder="Rechercher" aria-label="Search" oninput="searchPatients()">
                     <button class="btn btn-outline-success" type="submit">Rechercher</button>
                 </form>
 
