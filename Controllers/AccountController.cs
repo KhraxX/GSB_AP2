@@ -48,7 +48,7 @@ public async Task<IActionResult> Login(LoginViewModel model)
    
     public IActionResult Register()
 {
-    
+
     return View();
 }
 
@@ -80,4 +80,3 @@ public async Task<IActionResult> Register(RegisterViewModel model)
     return View(model);
 }
 }
-

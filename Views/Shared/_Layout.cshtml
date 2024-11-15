@@ -1,67 +1,54 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg ">
-        <div class="container-fluid">
-            <a asp-action="Index" asp-controller="Patient">
-            <img src="~/image/logo-gsb.png" width="90" height="50"></a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="text-log">
-            @if (User.Identity.IsAuthenticated) {
-                <span class="navbar-text">Ravie de vous revoir @User.Identity.Name!</span>
-                
-                <a asp-action="Logout" asp-controller="Account">
-                    <button type="button" class="btn btn-danger">Déconnexion
-                    </button>
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="/Patient/Index" class="flex items-center">
+                    <img src="~/image/logo-gsb.png" width="90" height="50" alt="Logo GSB" class="h-12 w-auto">
                 </a>
-                
-                } else {
-
-                <a asp-action="Login" asp-controller="Account"></a>
-                }
-            </div>
-                
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    
-                <form id="searchForm" class="d-flex text-right" role="search" onsubmit="return false;">
-                    <input class="form-control me-2" id="searchInput" type="text" placeholder="Rechercher" aria-label="Search" oninput="searchPatients()">
-                    <button class="btn btn-outline-success" type="submit">Rechercher</button>
-                </form>
-
+                <div class="flex items-center space-x-4">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <span class="text-gray-600">@User.Identity.Name</span>
+                        <a href="/Account/Logout">
+                            <button class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
+                                Déconnexion
+                            </button>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="/Account/Login"></a>
+                    }
+                </div>
             </div>
         </div>
-
     </nav>
+
     <div>@RenderBody()</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        </script>
+</body>
 
 <footer>
     <nav class="navbar bg-body-tertiary">
-  <div class="container-fluid">
-    <span class="navbar-brand mb-0 h1">FAQ</span>
-  </div>
-</nav>
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">FAQ</span>
+        </div>
+    </nav>
 </footer>
-
-
-</body>
-</html>
