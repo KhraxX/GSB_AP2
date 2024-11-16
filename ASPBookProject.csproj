@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Views/Student/" />
-    <Folder Include="Views\Allergie\" />
-    <Folder Include="Views\Antecedent\" />
     <Folder Include="wwwroot\css\" />
   </ItemGroup>
 

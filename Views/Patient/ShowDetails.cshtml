@@ -4,26 +4,26 @@
     <form class="row g-3">
         <div class="col-md-4">
             <label for="validationDefault02" class="form-label">Prénom</label>
-            <input type="text" class="form-control" id="validationDefault01" value="@Model.Patient.Prenom_p" disabled readonly>
+            <input type="text" class="form-control" id="validationDefault01" value="@Model.Patient.Prenom_p" disabled
+                readonly>
         </div>
         <div class="col-md-4">
             <label for="validationDefault02" class="form-label">Nom</label>
-            <input type="text" class="form-control" id="validationDefault02" value="@Model.Patient.Nom_p" disabled readonly>
+            <input type="text" class="form-control" id="validationDefault02" value="@Model.Patient.Nom_p" disabled
+                readonly>
         </div>
         <div class="col-md-4">
             <label for="validationDefault02" class="form-label">Numéro de sécurité social</label>
-            <input type="text" class="form-control" id="validationDefault02" value="@Model.Patient.Num_secu" disabled readonly>
+            <input type="text" class="form-control" id="validationDefault02" value="@Model.Patient.Num_secu" disabled
+                readonly>
         </div>
         <div class="col-md-4">
             <label for="validationDefault02" class="form-label">Sexe</label>
-            <input type="text" class="form-control" id="validationDefault02" value="@Model.Patient.Sexe_p" disabled readonly>
+            <input type="text" class="form-control" id="validationDefault02" value="@Model.Patient.Sexe_p" disabled
+                readonly>
         </div>
     </form>
 </div>
-
-@*{
-let's use data annotations now }
-*@
 
 <h4>Antécédents</h4>
 <div class="form-group">
@@ -43,17 +43,13 @@ let's use data annotations now }
     {
         <div class="form-check">
             <input class="form-check-input" type="checkbox" name="SelectedAllergieIds" value="@allergie.AllergieId"
-            @(Model.SelectedAllergieIds != null && Model.SelectedAllergieIds.Contains(allergie.AllergieId) ? "checked" : "") />
+            @(Model.SelectedAllergieIds != null && Model.SelectedAllergieIds.Contains(allergie.AllergieId) ? "checked" :
+                "") />
             <label class="form-check-label">@allergie.Libelle_al</label>
         </div>
     }
 </div>
 
-
-
 <div>
     <a asp-action="Index">Retour à la liste</a>
 </div>
-@*{
-same with the use of labels and asp-for now
-}*@

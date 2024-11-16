@@ -11,6 +11,7 @@ public class PatientEditViewModel
     public Patient? Patient { get; set; }
     public List<Antecedent>? Antecedents { get; set; }
     public List<Allergie>? Allergies { get; set; }
+    
     public List<int> SelectedAntecedentIds { get; set; } = new List<int>();
     public List<int> SelectedAllergieIds { get; set; } = new List<int>();
 }
@@ -39,7 +40,6 @@ namespace ASPBookProject.Controllers
         }
 
 
-        // Edit: PatientController 
         public async Task<IActionResult> Edit(int id)
         {
             var patient = await _context.Patients
@@ -68,10 +68,7 @@ namespace ASPBookProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(PatientEditViewModel viewModel)
         {
-            // if (id != viewModel.Patient.PatientId)
-            // {
-            //     return NotFound();
-            // }
+           
 
             if (ModelState.IsValid)
             {
@@ -87,13 +84,11 @@ namespace ASPBookProject.Controllers
                         return NotFound();
                     }
 
-                    // Mise à jour des propriétés du patient
                     patient.Nom_p = viewModel.Patient.Nom_p;
                     patient.Prenom_p = viewModel.Patient.Prenom_p;
                     patient.Sexe_p = viewModel.Patient.Sexe_p;
                     patient.Num_secu = viewModel.Patient.Num_secu;
 
-                    // Mise à jour des allergies
                     patient.Allergies.Clear();
                     if (viewModel.SelectedAllergieIds != null)
                     {
@@ -106,7 +101,6 @@ namespace ASPBookProject.Controllers
                         }
                     }
 
-                    // Mise à jour des antécédents
                     patient.Antecedents.Clear();
                     if (viewModel.SelectedAntecedentIds != null)
                     {
@@ -135,7 +129,6 @@ namespace ASPBookProject.Controllers
                 }
             }
 
-            // Si nous arrivons ici, quelque chose a échoué, réafficher le formulaire
             viewModel.Antecedents = await _context.Antecedents.ToListAsync();
             viewModel.Allergies = await _context.Allergies.ToListAsync();
             return View(viewModel);
@@ -173,14 +166,11 @@ namespace ASPBookProject.Controllers
     [HttpGet]
     public  IActionResult Delete(int id) 
     {
-            // On recherche l'instructeur à supprimer avec l'id fourni en paramètre
             Patient? pati = _context.Patients.FirstOrDefault<Patient>(ins => ins.PatientId == id);
 
-            if (pati != null) // Si l'instructeur est trouvé
+            if (pati != null) 
             {
-                return View(pati); // On retourne la vue Delete.cshtml avec l'instructeur à supprimer
             }
-            // Si l'instructeur n'est pas trouvé on retourne une erreur 404
             return NotFound();
 
 
@@ -189,39 +179,75 @@ namespace ASPBookProject.Controllers
     [HttpPost]
     public IActionResult DeleteConfirmed(int PatientId)
         {
-            // On recherche l'instructeur à supprimer avec l'id fourni en paramètre
             Patient? pati = _context.Patients.FirstOrDefault<Patient>(pat => pat.PatientId == PatientId);
 
-            if (pati != null) // Si l'instructeur est trouvé
+            if (pati != null) 
             {
                 _context.Patients.Remove(pati);
                 _context.SaveChanges();
-                return RedirectToAction("Index"); // On retourne la vue Delete.cshtml avec l'instructeur à supprimer
+                return RedirectToAction("Index"); 
             }
-            // Si l'instructeur n'est pas trouvé on retourne une erreur 404
             return NotFound();
-            //return View();
         }
 
         [HttpGet]
-        public IActionResult Add()
+        public async Task<IActionResult> Add()
         {
-            return View();
+            var viewModel = new PatientEditViewModel
+            {
+                Allergies = await _context.Allergies.ToListAsync(),
+                Antecedents = await _context.Antecedents.ToListAsync(),
+                SelectedAllergieIds = new List<int>(),
+                SelectedAntecedentIds = new List<int>()
+            };
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Add(Patient patient)
+        public async Task<IActionResult> Add(PatientEditViewModel viewModel)
         {
-            // verification de la validite du model avec ModelState
             if (!ModelState.IsValid)
             {
-                return View();
+                viewModel.Allergies = await _context.Allergies.ToListAsync();
+                viewModel.Antecedents = await _context.Antecedents.ToListAsync();
+                return View(viewModel);
             }
 
+        Patient patient = new Patient
+            {
+                Nom_p = viewModel.Patient.Nom_p,
+                Prenom_p = viewModel.Patient.Prenom_p,
+                Sexe_p = viewModel.Patient.Sexe_p,
+                Num_secu = viewModel.Patient.Num_secu,
+                Allergies = new List<Allergie>(),
+                Antecedents = new List<Antecedent>()
+            };
+ 
+            if (viewModel.SelectedAllergieIds != null)
+            {
+                var selectedAllergies = await _context.Allergies
+                    .Where(a => viewModel.SelectedAllergieIds.Contains(a.AllergieId))
+                    .ToListAsync();
+                foreach (var allergie in selectedAllergies)
+                {
+                    patient.Allergies.Add(allergie);
+                }
+            }
+            if (viewModel.SelectedAntecedentIds != null)
+            {
+                var selectedAntecedents = await _context.Antecedents
+                    .Where(a => viewModel.SelectedAntecedentIds.Contains(a.AntecedentId))
+                    .ToListAsync();
+                foreach (var antecedent in selectedAntecedents)
+                {
+                    patient.Antecedents.Add(antecedent);
+                }
+            }
             _context.Patients.Add(patient);
-            _context.SaveChanges();
-            // return View("Index", _dbContext.Instructors); // retourne la vue Index.cshtml avec la nouvelle liste
-            return RedirectToAction("Index");
+            await _context.SaveChangesAsync();
+ 
+            return RedirectToAction(nameof(Index));
+ 
         }
 
         [HttpGet("search")]
