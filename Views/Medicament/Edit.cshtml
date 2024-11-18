@@ -1,54 +1,89 @@
 ﻿@model MedicamentViewModel
 
-<h1>Éditer Médicament</h1>
+<div class="max-w-2xl mx-auto mt-12 px-4">
+    <div class="bg-white rounded-lg shadow-md p-8">
+        <h2 class="text-2xl font-semibold text-center text-gray-800 mb-8">
+            Éditer le médicament <span class="text-blue-600">"@Model.Medicament.Libelle_med"</span>
+        </h2>
 
-<form asp-action="Edit" asp-asp-controller="Medicament"  method="POST">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Medicament.MedicamentId" />
+        <form asp-action="Edit" asp-controller="Medicament" method="POST" class="space-y-6">
+            <div asp-validation-summary="ModelOnly" class="text-sm text-red-500 mb-6"></div>
+            <input type="hidden" asp-for="Medicament.MedicamentId" />
 
-    <div class="form-group">
-        <label asp-for="Medicament.Libelle_med" class="control-label">Libelle du Médicament</label>
-        <input asp-for="Medicament.Libelle_med" class="form-control" />
-        <span asp-validation-for="Medicament.Libelle_med" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Medicament.Contr_indication" class="control-label">Contre indication</label>
-        <input asp-for="Medicament.Contr_indication" class="form-control" />
-        <span asp-validation-for="Medicament.Contr_indication" class="text-danger"></span>
-    </div>
-
-    <h4>Antécédents</h4>
-    <div class="form-group">
-        @foreach (var antecedent in Model.Antecedents)
-        {
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="SelectedAntecedentIds" value="@antecedent.AntecedentId"
-                @(Model.SelectedAntecedentIds != null && Model.SelectedAntecedentIds.Contains(antecedent.AntecedentId) ?
-                    "checked" : "") />
-                <label class="form-check-label">@antecedent.Libelle_a</label>
+            <div class="bg-gray-50 rounded-lg p-6">
+                <label asp-for="Medicament.Libelle_med" 
+                       class="block text-sm font-medium text-gray-500 mb-2">
+                    Libellé du Médicament
+                </label>
+                <input asp-for="Medicament.Libelle_med" 
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="Medicament.Libelle_med" 
+                      class="text-sm text-red-500 mt-1 block"></span>
             </div>
-        }
-    </div>
 
-    <h4>Allergies</h4>
-    <div class="form-group">
-        @foreach (var allergie in Model.Allergies)
-        {
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="SelectedAllergieIds" value="@allergie.AllergieId"
-                @(Model.SelectedAllergieIds != null && Model.SelectedAllergieIds.Contains(allergie.AllergieId) ? "checked" :
-                    "") />
-                <label class="form-check-label">@allergie.Libelle_al</label>
+            <div class="bg-gray-50 rounded-lg p-6">
+                <label asp-for="Medicament.Contr_indication" 
+                       class="block text-sm font-medium text-gray-500 mb-2">
+                    Contre indication
+                </label>
+                <input asp-for="Medicament.Contr_indication" 
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="Medicament.Contr_indication" 
+                      class="text-sm text-red-500 mt-1 block"></span>
             </div>
-        }
-    </div>
 
-    <div class="form-group">
-        <input type="submit" value="Enregistrer" class="btn btn-primary" />
-    </div>
-</form>
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="text-sm font-medium text-gray-500 mb-4">Antécédents</h3>
+                <div class="flex flex-wrap gap-3">
+                    @foreach (var antecedent in Model.Antecedents)
+                    {
+                        <div class="inline-flex items-center bg-white px-4 py-2 rounded-lg border hover:bg-gray-50 transition-colors">
+                            <input type="checkbox" 
+                                   id="antecedent_@antecedent.AntecedentId"
+                                   name="SelectedAntecedentIds" 
+                                   value="@antecedent.AntecedentId"
+                                   @(Model.SelectedAntecedentIds != null && Model.SelectedAntecedentIds.Contains(antecedent.AntecedentId) ? "checked" : "")
+                                   class="h-4 w-4 text-blue-500 border-gray-300 rounded focus:ring-blue-500" />
+                            <label for="antecedent_@antecedent.AntecedentId" 
+                                   class="ml-2 text-sm text-gray-700 cursor-pointer select-none">
+                                @antecedent.Libelle_a
+                            </label>
+                        </div>
+                    }
+                </div>
+            </div>
 
-<div>
-    <a asp-action="Index">Retour à la liste</a>
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="text-sm font-medium text-gray-500 mb-4">Allergies</h3>
+                <div class="flex flex-wrap gap-3">
+                    @foreach (var allergie in Model.Allergies)
+                    {
+                        <div class="inline-flex items-center bg-white px-4 py-2 rounded-lg border hover:bg-gray-50 transition-colors">
+                            <input type="checkbox" 
+                                   id="allergie_@allergie.AllergieId"
+                                   name="SelectedAllergieIds" 
+                                   value="@allergie.AllergieId"
+                                   @(Model.SelectedAllergieIds != null && Model.SelectedAllergieIds.Contains(allergie.AllergieId) ? "checked" : "")
+                                   class="h-4 w-4 text-blue-500 border-gray-300 rounded focus:ring-blue-500" />
+                            <label for="allergie_@allergie.AllergieId" 
+                                   class="ml-2 text-sm text-gray-700 cursor-pointer select-none">
+                                @allergie.Libelle_al
+                            </label>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="flex justify-center space-x-4 pt-6">
+                <button type="submit" 
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-md font-medium transition-colors">
+                    Enregistrer
+                </button>
+                <a asp-action="Index" 
+                   class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-6 py-3 rounded-md font-medium transition-colors">
+                    Retour à la liste
+                </a>
+            </div>
+        </form>
+    </div>
 </div>
-

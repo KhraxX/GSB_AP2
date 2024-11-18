@@ -2,6 +2,7 @@
 
 using ASPBookProject.Data;
 using ASPBookProject.Models;
+using ASPBookProject.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,6 +44,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LoginPath = "/Account/Login"
 );
 
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 // set up middleware components
 var app = builder.Build();
@@ -87,5 +89,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Patient}/{action=Index}/{id?}"
 );
+
 
 app.Run();

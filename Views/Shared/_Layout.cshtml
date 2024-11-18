@@ -1,15 +1,18 @@
-﻿
+﻿<!DOCTYPE html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
-
+<body class="bg-gray-50 min-h-screen flex flex-col">
     <nav class="bg-white shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -34,47 +37,59 @@
             </div>
         </div>
     </nav>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow">
         <div class="mb-8">
             <div class="flex space-x-4">
                 <a asp-action="Index" asp-controller="Medicament">
-                    <button
-                        class="nav-button px-6 py-2.5 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-lg border border-gray-200">
+                    <button class="nav-button px-6 py-2.5 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-lg border border-gray-200">
                         Médicaments
                     </button>
                 </a>
                 <a asp-action="Index" asp-controller="Allergie">
-                    <button
-                        class="nav-button px-6 py-2.5 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-lg border border-gray-200">
+                    <button class="nav-button px-6 py-2.5 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-lg border border-gray-200">
                         Allergies
                     </button>
                 </a>
                 <a asp-action="Index" asp-controller="Antecedent">
-                    <button
-                        class="nav-button px-6 py-2.5 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-lg border border-gray-200">
+                    <button class="nav-button px-6 py-2.5 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-lg border border-gray-200">
                         Antécédents
                     </button>
                 </a>
                 <a asp-action="Index" asp-controller="Ordonnance">
-                    <button
-                        class="nav-button px-6 py-2.5 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-lg border border-gray-200">
+                    <button class="nav-button px-6 py-2.5 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-lg border border-gray-200">
                         Ordonnances
                     </button>
                 </a>
             </div>
         </div>
 
-        <body class="bg-gray-50 min-h-screen">@RenderBody()</body>
+        <main>
+            @RenderBody()
+        </main>
+    </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-            </script>
-
-
-<footer>
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">FAQ</span>
+    <footer class="bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 py-8">
+            <div class="flex justify-center space-x-8">
+                <a asp-action="Index" asp-controller="FAQ"
+                   class="text-gray-600 hover:text-gray-900 transition-colors">
+                    FAQ
+                </a>
+                <a asp-action="Index" asp-controller="Contact"
+                   class="text-gray-600 hover:text-gray-900 transition-colors">
+                    Contact
+                </a>
+            </div>
         </div>
-    </nav>
-</footer>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+        crossorigin="anonymous">
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
