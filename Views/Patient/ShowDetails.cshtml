@@ -1,55 +1,90 @@
-﻿@model PatientEditViewModel
-<h1>Fiche de Mr @Model.Patient.Nom_p </h1>
-<div class="container">
-    <form class="row g-3">
-        <div class="col-md-4">
-            <label for="validationDefault02" class="form-label">Prénom</label>
-            <input type="text" class="form-control" id="validationDefault01" value="@Model.Patient.Prenom_p" disabled
-                readonly>
-        </div>
-        <div class="col-md-4">
-            <label for="validationDefault02" class="form-label">Nom</label>
-            <input type="text" class="form-control" id="validationDefault02" value="@Model.Patient.Nom_p" disabled
-                readonly>
-        </div>
-        <div class="col-md-4">
-            <label for="validationDefault02" class="form-label">Numéro de sécurité social</label>
-            <input type="text" class="form-control" id="validationDefault02" value="@Model.Patient.Num_secu" disabled
-                readonly>
-        </div>
-        <div class="col-md-4">
-            <label for="validationDefault02" class="form-label">Sexe</label>
-            <input type="text" class="form-control" id="validationDefault02" value="@Model.Patient.Sexe_p" disabled
-                readonly>
-        </div>
-    </form>
-</div>
+﻿@model PatientViewModel
 
-<h4>Antécédents</h4>
-<div class="form-group">
-    @foreach (var antecedent in Model.Antecedents)
-    {
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="SelectedAntecedentIds" value="@antecedent.AntecedentId"
-            @(Model.SelectedAntecedentIds != null && Model.SelectedAntecedentIds.Contains(antecedent.AntecedentId) ?
-                "checked" : "") />
-            <label class="form-check-label">@antecedent.Libelle_a</label>
-        </div>
-    }
-</div>
-<h4>Allergies</h4>
-<div class="form-group">
-    @foreach (var allergie in Model.Allergies)
-    {
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="SelectedAllergieIds" value="@allergie.AllergieId"
-            @(Model.SelectedAllergieIds != null && Model.SelectedAllergieIds.Contains(allergie.AllergieId) ? "checked" :
-                "") />
-            <label class="form-check-label">@allergie.Libelle_al</label>
-        </div>
-    }
-</div>
+<div class="max-w-2xl mx-auto mt-12 px-4">
+    <div class="bg-white rounded-lg shadow-md p-8">
+        <h2 class="text-2xl font-semibold text-center text-gray-800 mb-8">Fiche de Mr @Model.Patient.Nom_p</h2>
 
-<div>
-    <a asp-action="Index">Retour à la liste</a>
+        <div class="space-y-6">
+            <div class="bg-gray-50 rounded-lg p-6">
+                <label class="text-sm font-medium text-gray-500 mb-2 block">Prénom</label>
+                <div class="text-lg text-gray-900">
+                    @Model.Patient.Prenom_p
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <label class="text-sm font-medium text-gray-500 mb-2 block">Nom</label>
+                <div class="text-lg text-gray-900">
+                    @Model.Patient.Nom_p
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <label class="text-sm font-medium text-gray-500 mb-2 block">Numéro de sécurité sociale</label>
+                <div class="text-lg text-gray-900">
+                    @Model.Patient.Num_secu
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <label class="text-sm font-medium text-gray-500 mb-2 block">Sexe</label>
+                <div class="text-lg text-gray-900">
+                    @{
+                        var sexeAffiche = Model.Patient.Sexe_p switch
+                        {
+                            "m" => "Homme",
+                            "f" => "Femme",
+                            "o" => "Autre",
+                            _ => Model.Patient.Sexe_p
+                        };
+                    }
+                    @sexeAffiche
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="text-sm font-medium text-gray-500 mb-3">Allergies</h3>
+                <div class="text-lg text-gray-900">
+                    @if (Model.Allergies != null && Model.Allergies.Any())
+                    {
+                        <ul class="list-disc pl-5 space-y-2">
+                            @foreach (var allergie in Model.Allergies)
+                            {
+                                <li>@allergie.Libelle_al</li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-gray-500 italic">Aucune allergie renseignée</p>
+                    }
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="text-sm font-medium text-gray-500 mb-3">Antécédents</h3>
+                <div class="text-lg text-gray-900">
+                    @if (Model.Antecedents != null && Model.Antecedents.Any())
+                    {
+                        <ul class="list-disc pl-5 space-y-2">
+                            @foreach (var antecedent in Model.Antecedents)
+                            {
+                                <li>@antecedent.Libelle_a</li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-gray-500 italic">Aucun antécédent renseigné</p>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="mt-8 flex justify-center">
+            <a asp-action="Index"
+                class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-md font-medium transition-colors">
+                Retour à la liste
+            </a>
+        </div>
+    </div>
 </div>

@@ -1,5 +1,69 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@using System.Collections
+
+@model IEnumerable<Antecedent>
+
+@if (Model.Count() > 0)
+{
+    <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-semibold text-gray-800">Liste des antécédents</h1>
+            <div class="flex space-x-4">
+                <div class="relative">
+                    <input type="search" placeholder="Rechercher un patient..."
+                        class="search-input w-64 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500">
+                    <span class="absolute right-3 top-2.5 text-gray-400">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </div>
+                <a asp-action="Add">
+                    <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                        <i class="fas fa-plus mr-2"></i>Ajouter un antécédents
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full">
+                <thead>
+                    <tr class="bg-gray-50">
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Nom de l'antécédent
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Actions
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @foreach (var antecedent in Model)
+                    {
+                        <tr class="table-row">
+                            <td>@Html.DisplayFor(m => antecedent.Libelle_a)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+
+                                <a asp-action="Edit" asp-route-id="@antecedent.AntecedentId">
+                                    <button class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded hover:bg-yellow-200">
+                                        Modifier
+                                    </button>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@antecedent.AntecedentId">
+                                    <button class="px-3 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200">
+                                        Supprimer
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+}
+else
+{
+    <p>Il n'y a pas d'antécédent</p>
+    <a asp-action="Add" class="btn btn-primary">Ajouter une nouvelle antécédent</a>
 }

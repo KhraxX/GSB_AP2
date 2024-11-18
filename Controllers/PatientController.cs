@@ -6,22 +6,22 @@ using Microsoft.EntityFrameworkCore;
 
 
 // Modèle ViewModel
-public class PatientEditViewModel
+public class PatientViewModel
 {
     public Patient? Patient { get; set; }
     public List<Antecedent>? Antecedents { get; set; }
     public List<Allergie>? Allergies { get; set; }
-    
+
     public List<int> SelectedAntecedentIds { get; set; } = new List<int>();
     public List<int> SelectedAllergieIds { get; set; } = new List<int>();
 }
 
 namespace ASPBookProject.Controllers
-{   
+{
     [Authorize]
     public class PatientController : Controller
     {
-        
+
         private readonly ApplicationDbContext _context;
 
         // Controleur, injection de dependance
@@ -34,7 +34,7 @@ namespace ASPBookProject.Controllers
         [Authorize]
         public ActionResult Index(string searchString)
         {
-        var patients = from p in _context.Patients select p;
+            var patients = from p in _context.Patients select p;
             if (!string.IsNullOrEmpty(searchString))
             {
                 patients = patients.Where(p => p.Nom_p.Contains(searchString) || p.Prenom_p.Contains(searchString)
@@ -57,7 +57,7 @@ namespace ASPBookProject.Controllers
                 return NotFound();
             }
 
-            var viewModel = new PatientEditViewModel
+            var viewModel = new PatientViewModel
             {
                 Patient = patient,
                 Antecedents = await _context.Antecedents.ToListAsync(),
@@ -71,9 +71,9 @@ namespace ASPBookProject.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(PatientEditViewModel viewModel)
+        public async Task<IActionResult> Edit(PatientViewModel viewModel)
         {
-           
+
             if (ModelState.IsValid)
             {
                 try
@@ -155,42 +155,40 @@ namespace ASPBookProject.Controllers
                 return NotFound();
             }
 
-            var viewModel = new PatientEditViewModel
+            var viewModel = new PatientViewModel
             {
                 Patient = patient,
-                Antecedents = await _context.Antecedents.ToListAsync(),
-                Allergies = await _context.Allergies.ToListAsync(),
-                SelectedAntecedentIds = patient.Antecedents.Select(a => a.AntecedentId).ToList() ?? new List<int>(),
-                SelectedAllergieIds = patient.Allergies.Select(a => a.AllergieId).ToList() ?? new List<int>()
+                // On utilise uniquement les antécédents et allergies du patient
+                Antecedents = patient.Antecedents.ToList(),
+                Allergies = patient.Allergies.ToList()
             };
 
             return View(viewModel);
         }
 
-    [HttpGet]
-    public  IActionResult Delete(int id) 
-    {
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
             Patient? pati = _context.Patients.FirstOrDefault<Patient>(ins => ins.PatientId == id);
 
-            if (pati != null) 
+            if (pati == null)
             {
                 return NotFound();
             }
             return View(pati);
+        }
 
-
-
-    }
-    [HttpPost]
-    public IActionResult DeleteConfirmed(int PatientId)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int PatientId)
         {
             Patient? pati = _context.Patients.FirstOrDefault<Patient>(pat => pat.PatientId == PatientId);
 
-            if (pati != null) 
+            if (pati != null)
             {
                 _context.Patients.Remove(pati);
                 _context.SaveChanges();
-                return RedirectToAction("Index"); 
+                return RedirectToAction("Index");
             }
             return NotFound();
         }
@@ -198,7 +196,7 @@ namespace ASPBookProject.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            var viewModel = new PatientEditViewModel
+            var viewModel = new PatientViewModel
             {
                 Allergies = await _context.Allergies.ToListAsync(),
                 Antecedents = await _context.Antecedents.ToListAsync(),
@@ -209,7 +207,7 @@ namespace ASPBookProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(PatientEditViewModel viewModel)
+        public async Task<IActionResult> Add(PatientViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -218,7 +216,7 @@ namespace ASPBookProject.Controllers
                 return View(viewModel);
             }
 
-        Patient patient = new Patient
+            Patient patient = new Patient
             {
                 Nom_p = viewModel.Patient.Nom_p,
                 Prenom_p = viewModel.Patient.Prenom_p,
@@ -227,7 +225,7 @@ namespace ASPBookProject.Controllers
                 Allergies = new List<Allergie>(),
                 Antecedents = new List<Antecedent>()
             };
- 
+
             if (viewModel.SelectedAllergieIds != null)
             {
                 var selectedAllergies = await _context.Allergies
@@ -250,9 +248,9 @@ namespace ASPBookProject.Controllers
             }
             _context.Patients.Add(patient);
             await _context.SaveChangesAsync();
- 
+
             return RedirectToAction(nameof(Index));
- 
+
         }
 
         [HttpGet("search")]

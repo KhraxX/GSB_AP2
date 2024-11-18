@@ -1,36 +1,67 @@
 ﻿@model MedicamentViewModel
 
-<h2>Detail du Médicament</h2>
-<br/>
-<div class="form-group">
-    <label asp-for="Medicament.Libelle_med" class="control-label"></label>
-    <div class="text-body-secondary">@Html.DisplayFor(model => model.Medicament.Libelle_med)</div>
-</div>
-<br/>
-<div class="form-group">
-    <label asp-for="Medicament.Contr_indication" class="control-label"></label>
-   <div class="text-body-secondary">@Html.DisplayFor(model => model.Medicament.Contr_indication)</div>
-</div>
-<br/>
-<h4>Allergies</h3>
-    <div class="form-group">
-        <ul>
-            @foreach (var allergie in Model.Allergies)
-            {
-                <li>@allergie.Libelle_al</li>
-            }
-        </ul>
+        <div class="max-w-2xl mx-auto mt-12 px-4">
+    <div class="bg-white rounded-lg shadow-md p-8">
+        <h2 class="text-2xl font-semibold text-center text-gray-800 mb-8">Détail du Médicament</h2>
+
+        <div class="space-y-6">
+            <div class="bg-gray-50 rounded-lg p-6">
+                <label asp-for="Medicament.Libelle_med" class="text-sm font-medium text-gray-500 mb-2 block">Nom du médicament</label>
+                <div class="text-lg text-gray-900">
+                    @Html.DisplayFor(model => model.Medicament.Libelle_med)
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <label asp-for="Medicament.Contr_indication" class="text-sm font-medium text-gray-500 mb-2 block">Contre indications</label>
+                <div class="text-lg text-gray-900">
+                    @Html.DisplayFor(model => model.Medicament.Contr_indication)
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="text-sm font-medium text-gray-500 mb-3">Allergies</h3>
+                <div class="text-lg text-gray-900">
+                    @if (Model.Allergies != null && Model.Allergies.Any())
+                    {
+                        <ul class="list-disc pl-5 space-y-2">
+                            @foreach (var allergie in Model.Allergies)
+                            {
+                                <li>@allergie.Libelle_al</li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-gray-500 italic">Aucune allergie renseignée</p>
+                    }
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="text-sm font-medium text-gray-500 mb-3">Antécédents</h3>
+                <div class="text-lg text-gray-900">
+                    @if (Model.Antecedents != null && Model.Antecedents.Any())
+                    {
+                        <ul class="list-disc pl-5 space-y-2">
+                            @foreach (var antecedent in Model.Antecedents)
+                            {
+                                <li>@antecedent.Libelle_a</li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-gray-500 italic">Aucun antécédent renseigné</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 flex justify-center">
+            <a asp-action="Index" class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-md font-medium transition-colors">
+                Retour à la liste
+            </a>
+        </div>
     </div>
-    <br/>
-    <h4>Antecedents</h3>
-        <div class="form-group">
-            <ul>
-                @foreach (var antecedent in Model.Antecedents)
-                {
-                    <li>@antecedent.Libelle_a</li>
-                }
-            </ul>
-        </div>
-        <div>
-            <a asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
-        </div>
+</div>

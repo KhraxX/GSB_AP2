@@ -1,12 +1,11 @@
-﻿
-@model Allergie
+﻿@model Allergie
 
-            <form asp-action="DeleteConfirmed" method="POST">
-                <input asp-for="AllergieId" type="hidden" />
-            <div class="max-w-2xl mx-auto mt-12 px-4">
+<form asp-action="DeleteConfirmed" method="POST">
+    <input asp-for="AllergieId" type="hidden" />
+    <div class="max-w-2xl mx-auto mt-12 px-4">
         <div class="bg-white rounded-lg shadow-md p-8">
             <h2 class="text-2xl font-semibold text-center text-gray-800 mb-8">Confirmer la suppression</h2>
-            
+
             <div class="bg-gray-50 rounded-lg p-6 mb-8">
                 <div class="space-y-4">
                     <div class="flex items-center space-x-4">
@@ -15,19 +14,22 @@
                     </div>
                 </div>
             </div>
+            <div class="bg-red-50 rounded-lg p-6 text-center">
+                <p class="text-gray-600 text-center mb-8">
+                    Êtes-vous sûr de vouloir supprimer cette allergie ? Cette action est irréversible.
+                </p>
 
-            <p class="text-gray-600 text-center mb-8">
-                Êtes-vous sûr de vouloir supprimer cette allergie ? Cette action est irréversible.
-            </p>
+                <div class="flex justify-center space-x-4">
 
-            <div class="flex justify-center space-x-4">
-
-                <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-md font-medium transition-colors">
-                    Oui, supprimer l'allergie
-                </button>
-                <button onclick="history.back()"  class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-6 py-3 rounded-md font-medium transition-colors">
-                    Non, revenir en arrière
-                </button>
+                    <button type="submit"
+                        class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-md font-medium transition-colors">
+                        Oui, supprimer l'allergie
+                    </button>
+                    <button onclick="history.back()"
+                        class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-6 py-3 rounded-md font-medium transition-colors">
+                        Non, revenir en arrière
+                    </button>
+                </div>
             </div>
         </div>
-        </form>
+</form>

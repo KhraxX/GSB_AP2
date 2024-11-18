@@ -1,23 +1,36 @@
 ﻿@model Allergie
 
-<h1>Éditer Allergie</h1>
+<div class="max-w-2xl mx-auto mt-12 px-4">
+    <div class="bg-white rounded-lg shadow-md p-8">
+        <h2 class="text-2xl font-semibold text-center text-gray-800 mb-8">
+            Éditer l'allergie <span class="text-blue-600">@Model.Libelle_al</span>
+        </h2>
 
-<form asp-action="Edit" asp-asp-controller="Allergie"  method="POST">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="AllergieId" />
+        <form asp-action="Edit" asp-controller="Allergie" method="POST" class="space-y-6">
+            <div asp-validation-summary="ModelOnly" class="text-sm text-red-500 mb-6"></div>
+            <input type="hidden" asp-for="AllergieId" />
 
-    <div class="form-group">
-        <label asp-for="Libelle_al" class="control-label"></label>
-        <input asp-for="Libelle_al" class="form-control" />
-        <span asp-validation-for="Libelle_al" class="text-danger"></span>
+            <div class="bg-gray-50 rounded-lg p-6">
+                <label asp-for="Libelle_al" 
+                       class="block text-sm font-medium text-gray-500 mb-2">
+                    Nom de l'allergie
+                </label>
+                <input asp-for="Libelle_al" 
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="Libelle_al" 
+                      class="text-sm text-red-500 mt-1 block"></span>
+            </div>
+
+            <div class="flex justify-center space-x-4 pt-6">
+                <button type="submit" 
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-md font-medium transition-colors">
+                    Enregistrer
+                </button>
+                <a asp-action="Index" 
+                   class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-6 py-3 rounded-md font-medium transition-colors">
+                    Retour à la liste
+                </a>
+            </div>
+        </form>
     </div>
-
-    <div class="form-group">
-        <input type="submit" value="Enregistrer" class="btn btn-primary" />
-    </div>
-</form>
-
-<div>
-    <a asp-action="Index">Retour à la liste</a>
 </div>
-
