@@ -11,24 +11,42 @@
 
 <body class="bg-gray-50 min-h-screen">
 
+<form asp-controller="Patient" asp-action="Index" method="get">
+    <div class="row">
+        <div class="col-6">
+            <input type="text" name="searchString" class="form-control">
+        </div>
+        <div class="col-2">
+            <input type="submit" value="rechercher" class="btn btn-primary" />
+        </div>
+        <div class="col-2">
+            <input type="submit" value="rafraichir la liste" class="btn btn-danger" />
+        </div>
+    </div>
+</form>
+
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="mb-8">
             <div class="flex space-x-4">
+                <a asp-action="Index" asp-controller="Medicament">
                 <button
                     class="nav-button px-6 py-2.5 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-lg border border-gray-200">
                     Médicaments
                 </button>
-                <a asp-action="Allergie/Index">
+                </a>
+                <a asp-action="Index" asp-controller="Allergie">
                 <button
                     class="nav-button px-6 py-2.5 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-lg border border-gray-200">
                     Allergies
                 </button>
                 </a>
+                <a asp-action="Index" asp-controller="Antecedent">
                 <button
                     class="nav-button px-6 py-2.5 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-lg border border-gray-200">
                     Antécédents
                 </button>
+                </a>
             </div>
         </div>
 

@@ -32,10 +32,15 @@ namespace ASPBookProject.Controllers
         // GET: PatientController
 
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            List<Patient> patients = new List<Patient>();
-            patients = _context.Patients.ToList();
+        var patients = from p in _context.Patients select p;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                patients = patients.Where(p => p.Nom_p.Contains(searchString) || p.Prenom_p.Contains(searchString)
+                || p.Sexe_p.Contains(searchString));
+                return View(patients);
+            }
             return View(patients);
         }
 
@@ -69,7 +74,6 @@ namespace ASPBookProject.Controllers
         public async Task<IActionResult> Edit(PatientEditViewModel viewModel)
         {
            
-
             if (ModelState.IsValid)
             {
                 try
@@ -170,8 +174,9 @@ namespace ASPBookProject.Controllers
 
             if (pati != null) 
             {
+                return NotFound();
             }
-            return NotFound();
+            return View(pati);
 
 
 

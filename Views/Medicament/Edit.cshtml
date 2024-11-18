@@ -1,30 +1,20 @@
-﻿@model PatientEditViewModel
+﻿@model MedicamentViewModel
 
-<h1>Éditer Patient</h1>
+<h1>Éditer Médicament</h1>
 
-<form asp-action="Edit" asp-asp-controller="Patient"  method="POST">
+<form asp-action="Edit" asp-asp-controller="Medicament"  method="POST">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Patient.PatientId" />
+    <input type="hidden" asp-for="Medicament.MedicamentId" />
 
     <div class="form-group">
-        <label asp-for="Patient.Nom_p" class="control-label"></label>
-        <input asp-for="Patient.Nom_p" class="form-control" />
-        <span asp-validation-for="Patient.Nom_p" class="text-danger"></span>
+        <label asp-for="Medicament.Libelle_med" class="control-label">Libelle du Médicament</label>
+        <input asp-for="Medicament.Libelle_med" class="form-control" />
+        <span asp-validation-for="Medicament.Libelle_med" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Patient.Prenom_p" class="control-label"></label>
-        <input asp-for="Patient.Prenom_p" class="form-control" />
-        <span asp-validation-for="Patient.Prenom_p" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Patient.Sexe_p" class="control-label"></label>
-        <input asp-for="Patient.Sexe_p" class="form-control" />
-        <span asp-validation-for="Patient.Sexe_p" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Patient.Num_secu" class="control-label"></label>
-        <input asp-for="Patient.Num_secu" class="form-control" />
-        <span asp-validation-for="Patient.Num_secu" class="text-danger"></span>
+        <label asp-for="Medicament.Contr_indication" class="control-label">Contre indication</label>
+        <input asp-for="Medicament.Contr_indication" class="form-control" />
+        <span asp-validation-for="Medicament.Contr_indication" class="text-danger"></span>
     </div>
 
     <h4>Antécédents</h4>

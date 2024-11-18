@@ -90,12 +90,12 @@
                         {
                             <div class="flex items-center p-2 bg-white rounded border">
                                 <input type="checkbox" 
-                                       id="antecedent_@allergie.AllergieId" 
-                                       name="SelectedAntecedentIds" 
+                                       id="allergie_@allergie.AllergieId" 
+                                       name="SelectedAllergieIds" 
                                        value="@allergie.AllergieId"
-                                       @(Model.SelectedAntecedentIds != null && Model.SelectedAntecedentIds.Contains(allergie.AllergieId) ? "checked" : "")
+                                       @(Model.SelectedAllergieIds != null && Model.SelectedAllergieIds.Contains(allergie.AllergieId) ? "checked" : "")
                                        class="form-check-input h-4 w-4 text-blue-500 border-gray-300 rounded focus:ring-blue-500" />
-                                <label for="antecedent_@allergie.AllergieId" 
+                                <label for="allergie_@allergie.AllergieId" 
                                        class="form-check-label ml-3 text-sm text-gray-700 cursor-pointer">
                                     @allergie.Libelle_al
                                 </label>

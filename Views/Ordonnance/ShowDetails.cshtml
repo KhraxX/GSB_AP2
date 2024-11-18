@@ -1,11 +1,8 @@
 ﻿@model OrdonnanceViewModel
  
-<h2>Suppression de l'ordonnace</h2>
-<br/>
-<form asp-action="Delete" method="post">
-    <div class="form-group">
-        <input type="hidden" asp-for="OrdonnanceId" />
-        <div class="form-group">
+<h2>Detail de l'ordonnace</h2>
+ 
+<div class="form-group">
     <label asp-for="Posologie" class="control-label"></label>
     <div class="text-body-secondary" >@Html.DisplayFor(model => model.Posologie)</div>
 </div>
@@ -43,12 +40,7 @@
                 <li>@Medicament.Libelle_med</li>
             }
         </ul>
-        <br/>
-        <br/>
     </div>
-        <h2>Voulez vous vraiment supprimer l'ordonnance ?</h2>
-        <br />
-        <input type="submit" class="btn btn-danger" value="Supprimer" />
-        <a asp-action="Index" class="btn btn-secondary">Annuler</a>
-    </div>
-</form>
+        <div>
+            <a asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
+        </div>
