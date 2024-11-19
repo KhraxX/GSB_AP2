@@ -15,7 +15,7 @@ namespace ASPBookProject.Controllers
 
         public IActionResult Index()
         {
-            return View(new ContactForm()); // Initialiser un modèle vide
+            return View(new ContactForm()); 
         }
 
         [HttpPost]
@@ -32,7 +32,6 @@ namespace ASPBookProject.Controllers
                 }
                 catch (Exception ex)
                 {
-                    // Log l'erreur si vous avez un système de logging
                     ModelState.AddModelError("", "Une erreur est survenue lors de l'envoi du message. Veuillez réessayer plus tard.");
                     return View(model);
                 }

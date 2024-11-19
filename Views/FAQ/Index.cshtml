@@ -1,17 +1,33 @@
-﻿@model IEnumerable<FAQ>
-
+﻿
 <div class="max-w-4xl mx-auto mt-12 px-4 mb-12">
     <div class="bg-white rounded-lg shadow-md p-8">
         <h2 class="text-3xl font-semibold text-center text-gray-800 mb-12">Questions fréquemment posées</h2>
 
         <div class="space-y-6">
-            @foreach (var faq in Model)
-            {
-                <div class="bg-gray-50 rounded-lg p-6">
-                    <h3 class="text-lg font-medium text-gray-900 mb-3">@faq.Question</h3>
-                    <p class="text-gray-600">@faq.Answer</p>
-                </div>
-            }
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="text-lg font-medium text-gray-900 mb-3">Comment créer une ordonnance ?</h3>
+                <p class="text-gray-600">Pour créer une ordonnance, accédez à l'onglet 'Ordonnances' puis cliquez sur le bouton 'Créer une ordonnance'. Sélectionnez ensuite le patient concerné et ajoutez les médicaments nécessaires.</p>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="text-lg font-medium text-gray-900 mb-3">Comment gérer les allergies d'un patient ?</h3>
+                <p class="text-gray-600">Les allergies d'un patient peuvent être gérées depuis sa fiche patient. Dans l'onglet 'Patients', sélectionnez le patient concerné puis utilisez la section 'Allergies' pour ajouter ou retirer des allergies.</p>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="text-lg font-medium text-gray-900 mb-3">Comment modifier un médicament ?</h3>
+                <p class="text-gray-600">Pour modifier un médicament, allez dans l'onglet 'Médicaments', trouvez le médicament concerné et cliquez sur le bouton 'Modifier'. Vous pourrez alors mettre à jour ses informations et ses contre-indications.</p>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="text-lg font-medium text-gray-900 mb-3">Comment rechercher un patient ?</h3>
+                <p class="text-gray-600">Utilisez la barre de recherche dans la section 'Patients' pour trouver rapidement un patient par son nom ou son numéro de sécurité sociale.</p>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="text-lg font-medium text-gray-900 mb-3">Comment gérer les antécédents d'un patient ?</h3>
+                <p class="text-gray-600">Dans la fiche du patient, section 'Antécédents', vous pouvez ajouter ou modifier les antécédents médicaux du patient.</p>
+            </div>
         </div>
 
         <div class="mt-12 text-center">

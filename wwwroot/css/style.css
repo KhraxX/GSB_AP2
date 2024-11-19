@@ -1,75 +1,20 @@
-.navbar {
-    background-color: aquamarine; 
+/* Styles de base pour le layout */
+html, body {
+    height: 100%;
 }
 
-.navbar-brand, .nav-link {
-    color: #000000 !important; 
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.navbar-toggler {
-    border-color: #000000; 
-}
-
-.dropdown-menu {
-    background-color: aquamarine; 
-}
-
-.dropdown-item {
-    color: #020101 !important; 
-}
-
-.dropdown-item:hover {
-    background-color: white;
-}
-
-.btn-outline-success {
-    color: #000000; 
-    border-color: #fff; 
-}
-
-.btn-outline-success:hover {
-    background-color: #fff; 
-    color: #4CAF50; 
-}
-
-.container {
-    margin: 0px 0px;
-    text-align: center;
-}
-
-.PatientTable {
-    border: 1px solid black; 
-    border-color: rgb(164, 164, 180);
-    margin: 0px 30px;
-}
-
-h1 {
-    text-align: center;
-    margin: 30px 0px;
-}
-
-.text-log {
-
-    padding: 0px 50px;
-}
-.doc{
-    width: 90%;
-    height:90%;
-}
-.collapse {
-    padding-left: 750px;
-    
-}
-
-.col-3 {
-
-    padding: 0px;
-}
-
+/* Styles pour la recherche */
 .search-input:focus {
     box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
 }
 
+/* Styles pour les boutons de navigation */
 .nav-button {
     transition: all 0.2s ease;
 }
@@ -79,11 +24,19 @@ h1 {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+/* Styles pour les lignes du tableau */
 .table-row:hover {
     background-color: rgba(243, 244, 246, 1);
 }
 
+/* Styles pour le footer */
 footer {
+    width: 100%;
+    background-color: #f3f4f6;
+    padding: 1rem 0;
+    text-align: center;
+}
 
-    position: absolute;
+[x-cloak] {
+    display: none !important;
 }
