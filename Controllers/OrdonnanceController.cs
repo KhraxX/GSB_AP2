@@ -11,7 +11,6 @@ namespace ASPBookProject.Controllers
 {
     public class OrdonnanceController : Controller
     {
-        // GET: OrdonnanceController
         private readonly UserManager<Medecin> _userManager;
         private readonly ApplicationDbContext _context;
 
@@ -20,7 +19,6 @@ namespace ASPBookProject.Controllers
             _context = context;
             _userManager = userManager;
         }
-        // GET: OrdonnanceController
         [Authorize]
         public async Task<IActionResult> Index()
         {

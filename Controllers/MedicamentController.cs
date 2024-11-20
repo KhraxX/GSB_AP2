@@ -154,11 +154,9 @@ namespace ASPBookProject.Controllers
                         return NotFound();
                     }
  
-                    // Mise à jour des propriétés du médicament
                     medicament.Libelle_med = viewModel.Medicament.Libelle_med;
                     medicament.Contr_indication = viewModel.Medicament.Contr_indication;
  
-                    // Mise à jour des allergies
                     medicament.Allergies.Clear();
                     if (viewModel.SelectedAllergieIds != null)
                     {
@@ -171,7 +169,6 @@ namespace ASPBookProject.Controllers
                         }
                     }
  
-                    // Mise à jour des antécédents
                     medicament.Antecedents.Clear();
                     if (viewModel.SelectedAntecedentIds != null)
                     {
@@ -202,7 +199,6 @@ namespace ASPBookProject.Controllers
                 }
             }
  
-            // Si nous arrivons ici, quelque chose a échoué, réafficher le formulaire
             ThrowException();
             viewModel.Antecedents = await _context.Antecedents.ToListAsync();
             viewModel.Allergies = await _context.Allergies.ToListAsync();

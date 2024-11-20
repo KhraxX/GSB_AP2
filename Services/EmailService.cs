@@ -20,7 +20,6 @@ namespace ASPBookProject.Services
         {
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             
-            // Vérification de la présence des paramètres requis
             _smtpServer = _configuration["EmailSettings:SmtpServer"] 
                 ?? throw new InvalidOperationException("SMTP server configuration is missing");
             

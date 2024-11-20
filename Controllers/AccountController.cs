@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 public class AccountController : Controller
 {
 
-    private readonly SignInManager<Medecin> _signInManager; // permet de gerer la connexion et la deconnexion des utilisateurs, nous est fourni par ASP.NET Core Identity
+    private readonly SignInManager<Medecin> _signInManager;
     private readonly UserManager<Medecin> _userManager;
 
     public AccountController(SignInManager<Medecin> signInManager, UserManager<Medecin> userManager)
@@ -18,7 +18,7 @@ public class AccountController : Controller
 
     public IActionResult Login()
     {
-        return View(); // Affiche la vue Login
+        return View(); 
     }
 
     [HttpPost]
@@ -111,7 +111,6 @@ public async Task<IActionResult> Edit(EditMedecinViewModel model)
             return NotFound();
         }
 
-        // Vérifier le mot de passe actuel
         var validPassword = await _userManager.CheckPasswordAsync(user, model.CurrentPassword);
         if (!validPassword)
         {
@@ -119,13 +118,11 @@ public async Task<IActionResult> Edit(EditMedecinViewModel model)
             return View(model);
         }
 
-        // Mettre à jour les informations de base
         user.UserName = model.UserName;
         user.Login_m = model.Login_m;
 
         var result = await _userManager.UpdateAsync(user);
 
-        // Changer le mot de passe si un nouveau mot de passe est fourni
         if (!string.IsNullOrEmpty(model.NewPassword))
         {
             var changePasswordResult = await _userManager.ChangePasswordAsync(user, 
@@ -142,7 +139,6 @@ public async Task<IActionResult> Edit(EditMedecinViewModel model)
 
         if (result.Succeeded)
         {
-            // Actualiser le cookie d'authentification
             await _signInManager.RefreshSignInAsync(user);
             TempData["SuccessMessage"] = "Votre profil a été mis à jour avec succès.";
             return RedirectToAction("Index", "Patient");

@@ -7,43 +7,36 @@
         <form asp-action="Delete" method="post">
             <input type="hidden" asp-for="OrdonnanceId" />
             <div class="space-y-6">
-                <!-- Posologie -->
                 <div class="bg-gray-50 rounded-lg p-6">
                     <label class="text-sm font-medium text-gray-500 mb-2 block">Posologie</label>
                     <div class="text-lg text-gray-900">@Html.DisplayFor(model => model.Posologie)</div>
                 </div>
 
-                <!-- Date de début -->
                 <div class="bg-gray-50 rounded-lg p-6">
                     <label class="text-sm font-medium text-gray-500 mb-2 block">Date de début</label>
                     <div class="text-lg text-gray-900">@Html.DisplayFor(model => model.Date_debut)</div>
                 </div>
 
-                <!-- Date de fin -->
                 <div class="bg-gray-50 rounded-lg p-6">
                     <label class="text-sm font-medium text-gray-500 mb-2 block">Date de fin</label>
                     <div class="text-lg text-gray-900">@Html.DisplayFor(model => model.Date_fin)</div>
                 </div>
 
-                <!-- Instructions spécifiques -->
                 <div class="bg-gray-50 rounded-lg p-6">
                     <label class="text-sm font-medium text-gray-500 mb-2 block">Instructions spécifiques</label>
                     <div class="text-lg text-gray-900">@Html.DisplayFor(model => model.Instructions_specifique)</div>
                 </div>
 
-                <!-- Patient -->
                 <div class="bg-gray-50 rounded-lg p-6">
                     <label class="text-sm font-medium text-gray-500 mb-2 block">Patient</label>
                     <div class="text-lg text-gray-900">@Html.DisplayFor(model => model.Patient.Prenom_p)</div>
                 </div>
 
-                <!-- Médecin -->
                 <div class="bg-gray-50 rounded-lg p-6">
                     <label class="text-sm font-medium text-gray-500 mb-2 block">Médecin</label>
                     <div class="text-lg text-gray-900">@Html.DisplayFor(model => model.Medecin.UserName)</div>
                 </div>
 
-                <!-- Médicaments -->
                 <div class="bg-gray-50 rounded-lg p-6">
                     <h3 class="text-sm font-medium text-gray-500 mb-3">Médicaments</h3>
                     <div class="text-lg text-gray-900">
@@ -58,7 +51,6 @@
                     </div>
                 </div>
 
-                <!-- Message de confirmation -->
                 <div class="bg-red-50 rounded-lg p-6 text-center">
                     <p class="text-red-600 font-medium mb-6">
                         Voulez-vous vraiment supprimer cette ordonnance ? Cette action est irréversible.

@@ -9,7 +9,6 @@
         <form asp-action="Login" asp-controller="Account" method="post" class="space-y-6">
             <div asp-validation-summary="ModelOnly" class="text-sm text-red-500 mb-6"></div>
 
-            <!-- Nom d'utilisateur -->
             <div class="bg-gray-50 rounded-lg p-6">
                 <label asp-for="UserName" class="block text-sm font-medium text-gray-500 mb-2">
                     Nom d'utilisateur
@@ -19,7 +18,6 @@
                 <span asp-validation-for="UserName" class="text-sm text-red-500 mt-1 block"></span>
             </div>
 
-            <!-- Mot de passe -->
             <div class="bg-gray-50 rounded-lg p-6">
                 <label asp-for="Password" class="block text-sm font-medium text-gray-500 mb-2">
                     Mot de passe
@@ -29,7 +27,6 @@
                 <span asp-validation-for="Password" class="text-sm text-red-500 mt-1 block"></span>
             </div>
 
-            <!-- Bouton de connexion -->
             <div class="flex justify-center pt-4">
                 <button type="submit" 
                         class="w-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-md font-medium transition-colors">
@@ -38,7 +35,6 @@
             </div>
         </form>
 
-        <!-- Lien d'inscription -->
         <div class="mt-6 text-center">
             <p class="text-gray-600">
                 Vous n'avez pas de compte ? 

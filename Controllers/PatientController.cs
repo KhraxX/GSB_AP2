@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 
-// Modèle ViewModel
 public class PatientViewModel
 {
     public Patient? Patient { get; set; }
@@ -24,12 +23,10 @@ namespace ASPBookProject.Controllers
 
         private readonly ApplicationDbContext _context;
 
-        // Controleur, injection de dependance
         public PatientController(ApplicationDbContext context)
         {
             _context = context;
         }
-        // GET: PatientController
 
         [Authorize]
         public ActionResult Index(string searchString)
@@ -158,7 +155,6 @@ namespace ASPBookProject.Controllers
             var viewModel = new PatientViewModel
             {
                 Patient = patient,
-                // On utilise uniquement les antécédents et allergies du patient
                 Antecedents = patient.Antecedents.ToList(),
                 Allergies = patient.Allergies.ToList()
             };
