@@ -2,6 +2,9 @@
 
 @model IEnumerable<Allergie>
 
+@{
+    ViewData["Title"] = "Liste des allergies";
+}
 @if (Model.Count() > 0)
 {
     <div class="bg-white rounded-lg shadow-sm p-6 mb-8">

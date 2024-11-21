@@ -2,4 +2,4 @@
 
 ## MCD
 
-![alt text](image.png)
+![alt text](MCD.png)

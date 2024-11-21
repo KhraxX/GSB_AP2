@@ -1,5 +1,7 @@
 ﻿@model Allergie
-
+@{
+    ViewData["Title"] = "Supprimer une allergie";
+}
 <form asp-action="DeleteConfirmed" method="POST">
     <input asp-for="AllergieId" type="hidden" />
     <div class="max-w-2xl mx-auto mt-12 px-4">

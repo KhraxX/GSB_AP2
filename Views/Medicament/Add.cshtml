@@ -1,9 +1,8 @@
 ﻿@model MedicamentViewModel
 
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Ajouter</title>
-</head>
+@{
+    ViewData["Title"] = "Créer un médicament";
+}
 
 
 
@@ -26,61 +25,60 @@
 
 
             <div class="form-group border rounded-lg p-6 bg-gray-50">
-                <h4 class="text-lg font-medium text-gray-900 mb-4">Antécédents</h4>
-                <div class="grid gap-3">
-                @{
-                    if (Model.Antecedents != null)
-                    {
-                        @foreach (var antecedent in Model.Antecedents)
+                <h4 class="text-lg font-medium text-gray-900 mb-4">Allergies</h4>
+                <div class="flex flex-wrap gap-3">
+                    @{
+                        if (Model.Allergies != null && Model.Allergies.Any())
                         {
-                            <div class="flex items-center p-2 bg-white rounded border">
-                                <input type="checkbox" 
-                                       id="antecedent_@antecedent.AntecedentId" 
-                                       name="SelectedAntecedentIds" 
-                                       value="@antecedent.AntecedentId"
-                                       @(Model.SelectedAntecedentIds != null && Model.SelectedAntecedentIds.Contains(antecedent.AntecedentId) ? "checked" : "")
-                                       class="form-check-input h-4 w-4 text-blue-500 border-gray-300 rounded focus:ring-blue-500" />
-                                <label for="antecedent_@antecedent.AntecedentId" 
-                                       class="form-check-label ml-3 text-sm text-gray-700 cursor-pointer">
-                                    @antecedent.Libelle_a
-                                </label>
-                            </div>
+                            @foreach (var allergie in Model.Allergies)
+                            {
+                                <div
+                                    class="inline-flex items-center bg-white px-4 py-2 rounded-lg border hover:bg-gray-50 transition-colors">
+                                    <input type="checkbox" id="allergie_@allergie.AllergieId" name="SelectedAllergieIds"
+                                        value="@allergie.AllergieId" @(Model.SelectedAllergieIds != null &&
+                            Model.SelectedAllergieIds.Contains(allergie.AllergieId) ? "checked" : "")
+                                        class="h-4 w-4 text-blue-500 border-gray-300 rounded focus:ring-blue-500" />
+                                    <label for="allergie_@allergie.AllergieId"
+                                        class="ml-2 text-sm text-gray-700 cursor-pointer select-none">
+                                        @allergie.Libelle_al
+                                    </label>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <p class="text-gray-500 italic">Aucune allergie disponible</p>
                         }
                     }
-                    else
-                    {
-                        <p>Aucun antécédent disponible</p>
-                    }
-                }
                 </div>
             </div>
+
             <div class="form-group border rounded-lg p-6 bg-gray-50">
-                <h4 class="text-lg font-medium text-gray-900 mb-4">Allérgies</h4>
-                <div class="grid gap-3">
-                @{
-                    if (Model.Allergies != null)
-                    {
-                        @foreach (var allergie in Model.Allergies)
+                <h4 class="text-lg font-medium text-gray-900 mb-4">Antécédents</h4>
+                <div class="flex flex-wrap gap-3">
+                    @{
+                        if (Model.Antecedents != null && Model.Antecedents.Any())
                         {
-                            <div class="flex items-center p-2 bg-white rounded border">
-                                <input type="checkbox" 
-                                       id="allergie_@allergie.AllergieId" 
-                                       name="SelectedAllergieIds" 
-                                       value="@allergie.AllergieId"
-                                       @(Model.SelectedAllergieIds != null && Model.SelectedAllergieIds.Contains(allergie.AllergieId) ? "checked" : "")
-                                       class="form-check-input h-4 w-4 text-blue-500 border-gray-300 rounded focus:ring-blue-500" />
-                                <label for="Allergie_@allergie.AllergieId" 
-                                       class="form-check-label ml-3 text-sm text-gray-700 cursor-pointer">
-                                    @allergie.Libelle_al
-                                </label>
-                            </div>
+                            @foreach (var antecedent in Model.Antecedents)
+                            {
+                                <div
+                                    class="inline-flex items-center bg-white px-4 py-2 rounded-lg border hover:bg-gray-50 transition-colors">
+                                    <input type="checkbox" id="antecedent_@antecedent.AntecedentId" name="SelectedAntecedentIds"
+                                        value="@antecedent.AntecedentId" @(Model.SelectedAntecedentIds != null &&
+                            Model.SelectedAntecedentIds.Contains(antecedent.AntecedentId) ? "checked" : "")
+                                        class="h-4 w-4 text-blue-500 border-gray-300 rounded focus:ring-blue-500" />
+                                    <label for="antecedent_@antecedent.AntecedentId"
+                                        class="ml-2 text-sm text-gray-700 cursor-pointer select-none">
+                                        @antecedent.Libelle_a
+                                    </label>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <p class="text-gray-500 italic">Aucun antécédent disponible</p>
                         }
                     }
-                    else
-                    {
-                        <p>Aucune allergie disponible</p>
-                    }
-                }
                 </div>
             </div>
 

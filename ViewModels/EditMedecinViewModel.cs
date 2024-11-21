@@ -9,9 +9,7 @@ public class EditMedecinViewModel
     [Display(Name = "Nom d'utilisateur")]
     public string UserName { get; set; }
 
-    [Required(ErrorMessage = "Le login est requis")]
-    [Display(Name = "Login")]
-    public string Login_m { get; set; }
+    
 
     [Required(ErrorMessage = "Le mot de passe actuel est requis")]
     [DataType(DataType.Password)]

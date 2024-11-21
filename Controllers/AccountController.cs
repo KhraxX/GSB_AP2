@@ -60,7 +60,7 @@ public class AccountController : Controller
             var medecin = new Medecin
             {
                 UserName = model.UserName,
-                Login_m = model.Login_m,
+                
                 Role = model.Role,
                 Date_naissance_m = model.Date,
             };
@@ -92,7 +92,7 @@ public async Task<IActionResult> Edit()
     var model = new EditMedecinViewModel
     {
         UserName = user.UserName,
-        Login_m = user.Login_m
+        
     };
 
     return View(model);
@@ -119,7 +119,7 @@ public async Task<IActionResult> Edit(EditMedecinViewModel model)
         }
 
         user.UserName = model.UserName;
-        user.Login_m = model.Login_m;
+        
 
         var result = await _userManager.UpdateAsync(user);
 
