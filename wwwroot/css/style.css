@@ -1,4 +1,3 @@
-/* Styles de base pour le layout */
 html, body {
     height: 100%;
 }
@@ -9,12 +8,10 @@ body {
     flex-direction: column;
 }
 
-/* Styles pour la recherche */
 .search-input:focus {
     box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
 }
 
-/* Styles pour les boutons de navigation */
 .nav-button {
     transition: all 0.2s ease;
 }
@@ -24,12 +21,10 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Styles pour les lignes du tableau */
 .table-row:hover {
     background-color: rgba(243, 244, 246, 1);
 }
 
-/* Styles pour le footer */
 footer {
     width: 100%;
     background-color: #f3f4f6;
