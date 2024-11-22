@@ -114,7 +114,7 @@
                 $("#searchInput").on("keyup", function () {
                     var value = $(this).val().toLowerCase();
                     $("table tbody tr").each(function () {
-                        var text = $(this).find("td:first").text().toLowerCase();
+                        var text = $(this).find("td:nth-child(6)").text().toLowerCase();
                         $(this).toggle(text.indexOf(value) > -1);
                     });
                 });

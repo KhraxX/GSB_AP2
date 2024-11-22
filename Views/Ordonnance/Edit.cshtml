@@ -3,62 +3,79 @@
  @{
     ViewData["Title"] = "Modifier l'ordonnance'";
 }
-<h2>Éditer Ordonnance</h2>
- 
-<form asp-action="Edit">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="OrdonnanceId" />
- 
-    <div class="form-group">
-        <label asp-for="Posologie" class="control-label"></label>
-        <input asp-for="Posologie" class="form-control" />
-        <span asp-validation-for="Posologie" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Date_debut" class="control-label"></label>
-        <input asp-for="Date_debut" class="form-control" type="date" />
-        <span asp-validation-for="Date_debut" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Date_fin" class="control-label"></label>
-        <input asp-for="Date_fin" class="form-control" type="date" />
-        <span asp-validation-for="Date_fin" class="text-danger"></span>
-    </div>
-      <div class="form-group">
-        <label asp-for="Instructions_specifique" class="control-label"></label>
-        <input asp-for="Instructions_specifique" class="form-control" />
-        <span asp-validation-for="Instructions_specifique" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Patient"></label>
-        <select asp-for="PatientId" class="form-control">
-            <option value="" >Sélectionné le patient</option>
-            @foreach (var pat in Model.Patients)
-            {
-                <option value="@pat.PatientId">@pat.Nom_p</option>
-            }
-        </select>
-        <span asp-validation-for="PatientId" class="text-danger"></span>
-    </div>
-    <h4>Medicaments</h4>
-        <div class="form-group">
-            @foreach (var medicament in Model.Medicaments )
-            {
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="SelectedMedicamentId" value="@medicament.MedicamentId"
-                    @(Model.SelectedMedicamentId != null && Model.SelectedMedicamentId.Contains(medicament.MedicamentId) ?
-                        "checked" : "") />
-                    <label class="form-check-label">@medicament.Libelle_med</label>
+
+ <div class="max-w-2xl mx-auto mt-12 px-4">
+    <div class="bg-white rounded-lg shadow-md p-8">
+        <h2 class="text-2xl font-semibold text-center text-gray-800 mb-8">Éditer Ordonnance</h2>
+
+        <form asp-action="Edit" method="POST" class="space-y-6">
+            <div asp-validation-summary="ModelOnly" class="text-sm text-red-500 mb-6"></div>
+            <input type="hidden" asp-for="OrdonnanceId" />
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <label asp-for="Posologie" class="block text-sm font-medium text-gray-500 mb-2">Posologie</label>
+                <input asp-for="Posologie" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="Posologie" class="text-sm text-red-500 mt-1 block"></span>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <label asp-for="Date_debut" class="block text-sm font-medium text-gray-500 mb-2">Date de début</label>
+                <input asp-for="Date_debut" type="date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="Date_debut" class="text-sm text-red-500 mt-1 block"></span>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <label asp-for="Date_fin" class="block text-sm font-medium text-gray-500 mb-2">Date de fin</label>
+                <input asp-for="Date_fin" type="date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="Date_fin" class="text-sm text-red-500 mt-1 block"></span>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <label asp-for="Instructions_specifique" class="block text-sm font-medium text-gray-500 mb-2">Instructions spécifiques</label>
+                <input asp-for="Instructions_specifique" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="Instructions_specifique" class="text-sm text-red-500 mt-1 block"></span>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <label asp-for="Patient" class="block text-sm font-medium text-gray-500 mb-2">Patient</label>
+                <select asp-for="PatientId" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    <option value="">Sélectionnez le patient</option>
+                    @foreach (var pat in Model.Patients)
+                    {
+                        <option value="@pat.PatientId">@pat.Nom_p @pat.Prenom_p</option>
+                    }
+                </select>
+                <span asp-validation-for="PatientId" class="text-sm text-red-500 mt-1 block"></span>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="text-sm font-medium text-gray-500 mb-4">Médicaments</h3>
+                <div class="flex flex-wrap gap-3">
+                    @foreach (var medicament in Model.Medicaments)
+                    {
+                        <div class="inline-flex items-center bg-white px-4 py-2 rounded-lg border hover:bg-gray-50 transition-colors">
+                            <input type="checkbox" 
+                                   id="medicament_@medicament.MedicamentId" 
+                                   name="SelectedMedicamentId" 
+                                   value="@medicament.MedicamentId"
+                                   @(Model.SelectedMedicamentId != null && Model.SelectedMedicamentId.Contains(medicament.MedicamentId) ? "checked" : "")
+                                   class="h-4 w-4 text-blue-500 border-gray-300 rounded focus:ring-blue-500" />
+                            <label for="medicament_@medicament.MedicamentId" class="ml-2 text-sm text-gray-700 cursor-pointer select-none">
+                                @medicament.Libelle_med
+                            </label>
+                        </div>
+                    }
                 </div>
-            }
-        </div>
- 
-    <div class="form-group">
-        <input type="submit" value="Enregistrer" class="btn btn-primary" />
+            </div>
+
+            <div class="flex justify-center space-x-4 pt-6">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-md font-medium transition-colors">
+                    Enregistrer
+                </button>
+                <a asp-action="Index" class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-6 py-3 rounded-md font-medium transition-colors">
+                    Retour à la liste
+                </a>
+            </div>
+        </form>
     </div>
-</form>
- 
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Retour à la liste</a>
 </div>
- 

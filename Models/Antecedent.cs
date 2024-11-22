@@ -11,3 +11,6 @@ public class Antecedent
     public List<Medicament> Medicaments { get; set; } = new();
     public List<Patient> Patients { get; set; } = new();
 }
+
+
+
